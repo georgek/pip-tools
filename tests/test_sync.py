@@ -272,15 +272,7 @@ def test_sync_install_temporary_requirement_file(
         to_install = {from_line("django==1.8")}
         sync(to_install, set())
         check_call.assert_called_once_with(
-            [
-                sys.executable,
-                "-m",
-                "pip",
-                "install",
-                "-r",
-                mocked_tmp_req_file.name,
-                "-q",
-            ]
+            ["python", "-m", "pip", "install", "-r", mocked_tmp_req_file.name, "-q"]
         )
 
 
@@ -473,5 +465,5 @@ def test_sync_uninstall_pip_command(check_call):
 
     sync(set(), to_uninstall)
     check_call.assert_called_once_with(
-        [sys.executable, "-m", "pip", "uninstall", "-y", "-q"] + sorted(to_uninstall)
+        ["python", "-m", "pip", "uninstall", "-y", "-q"] + sorted(to_uninstall)
     )

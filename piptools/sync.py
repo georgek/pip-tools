@@ -1,6 +1,5 @@
 import collections
 import os
-import sys
 import tempfile
 from subprocess import check_call  # nosec
 
@@ -187,7 +186,7 @@ def sync(
     if not dry_run:
         if to_uninstall:
             check_call(  # nosec
-                [sys.executable, "-m", "pip", "uninstall", "-y"]
+                ["python", "-m", "pip", "uninstall", "-y"]
                 + pip_flags
                 + sorted(to_uninstall)
             )
@@ -208,7 +207,7 @@ def sync(
 
             try:
                 check_call(  # nosec
-                    [sys.executable, "-m", "pip", "install", "-r", tmp_req_file.name]
+                    ["python", "-m", "pip", "install", "-r", tmp_req_file.name]
                     + pip_flags
                     + install_flags
                 )
